@@ -28,6 +28,7 @@ echo "--api_name		    *The API project to import"
 echo "--apigateway_url      APIGateway url to import or export from.Default is http://localhost:5555"
 echo "--username            The APIGateway username.Default is Administrator."
 echo "--password            The APIGateway password.Default is password."
+echo "--api_folder			The full path to the repo containing the apis"
 exit
 }
 
@@ -52,7 +53,11 @@ parseArgs(){
       --password)
         password=${1}
         shift
-	  ;;	
+	  ;;
+      --api_folder)
+        api_folder=${1}
+        shift
+	  ;;	  
 	  --import)
         shldDoImport='true'
       ;;
@@ -88,9 +93,9 @@ fi
 if [ "$shldDoImport" = "true" ]
 then
     echo "Importing the API"
-	import_api $api $url $username $password
+	import_api $api $url $username $password $api_folder
 else
-	export_api $api $url $username $password
+	export_api $api $url $username $password $api_folder
 fi
 }
 

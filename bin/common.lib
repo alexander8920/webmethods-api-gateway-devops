@@ -58,12 +58,14 @@ import_api() {
 	password=$4
 	BIN_DIR="$PWD"
 	CURR_DIR="../"
-	API_DIR=$CURR_DIR/apis/$api_project
+	API_DIR=$5/$api_project
 	
 	if [ -d "$API_DIR" ] 
 	then
+		echo "Zipping"
 		cd $API_DIR && zip -r $CURR_DIR/$api_project.zip ./*
-		curl -sS -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
+		echo "Sending"
+		curl -Sv -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
 		rm $CURR_DIR/$api_project.zip
 	else
 		echo "The API with name $api does not exist as a flat file."
@@ -87,7 +89,7 @@ import_configurations() {
 	if [ -d "$CONF_DIR" ] 
 	then
 		cd $CONF_DIR && zip -r config.zip ./*
-		curl -sS -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
+		curl -S -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
 		rm config.zip
 	else
 		echo "The Configuration with name $configuration_name does not exists as a flat file."
@@ -105,11 +107,14 @@ export_api() {
 	password=$4
 	BIN_DIR="$PWD"
 	CURR_DIR="../"
-	API_DIR=$CURR_DIR/apis/$api_project
-	
+	API_DIR=$5/$api_project
+	echo "Using $API_DIR/export_payload.json"
+	cat $API_DIR/export_payload.json
 	if [ -d "$API_DIR" ] 
 	then
-	curl -s $url/rest/apigateway/archive -d @"$API_DIR/export_payload.json" --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
+	curl -v $url/rest/apigateway/archive -d @"$API_DIR/export_payload.json" --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
+	pwd
+	ls $CURR_DIR
 	unzip -o $CURR_DIR/$api_project.zip -d $API_DIR/
 	rm $CURR_DIR/$api_project.zip
 	else
