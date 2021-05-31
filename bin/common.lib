@@ -89,7 +89,7 @@ import_source_api() {
 	IDAPI=$7
 	TYPEAPI=$8
 		echo "Zipping"
-		zip -r $API_DIR/$api_project.zip $API_DIR/* -x $API_DIR/app.config
+		zip -r $API_DIR/$api_project.zip $API_DIR/ -x $API_DIR/app.config
 		echo "Sending"
 		curl --location --request PUT "${url}/rest/apigateway/apis/${IDAPI}" \
       --header "Content-Type: multipart/form-data" \
