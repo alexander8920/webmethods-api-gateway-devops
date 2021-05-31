@@ -183,11 +183,11 @@ export_configurations() {
 ##############################################################################
 get_api() {
 	nameapi=$1
-	url=$2
-	username=$3
-	password=$4
+	URLAPIGATEWAY=$2
+	USERNAMEAPI=$3
+	PASSWORDAPI=$4
   
-	curl --location --request POST "$url/rest/apigateway/search" \
+	curl --location --request POST $url/rest/apigateway/search" \
     --header 'Content-Type: application/json' \
     --data-raw ' {
       "types" : ["api"], 
@@ -197,8 +197,7 @@ get_api() {
              "keyword" : "$nameapi" 
          }
       ] 
-    }' \
-		-u $username:$password --output info.json
+    }' -u $username:$password --output info.json
 }
 
 
