@@ -68,7 +68,7 @@ main(){
     echo "API name is missing" 
   usage
   fi
-  import_source_api $api $url $username $password
+  get_api $api $url $username $password
 }
 #Call the main function with all arguments passed in...
 main "$@"
