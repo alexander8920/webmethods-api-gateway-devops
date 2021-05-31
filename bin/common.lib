@@ -88,8 +88,6 @@ import_source_api() {
 	ROOTFILENAME=$6
 	IDAPI=$7
 	TYPEAPI=$8
-	if [ -d "$API_DIR" ] 
-	then
 		echo "Zipping"
 		zip -r $API_DIR/$api_project.zip ./* -x app.config
 		echo "Sending"
@@ -97,13 +95,9 @@ import_source_api() {
       --header 'Content-Type: multipart/form-data' \
       --form 'file=@"$API_DIR/$api_project.zip"' \
       --form 'apiName="$api_project"' \
-      --form 'type="$TIPEAPI"' \
+      --form 'type="$TYPEAPI"' \
       --form 'rootFileName="$ROOTFILENAME"' \
 			-u $username:$password
-	else
-		echo "The API with name $api does not exist as a flat file."
-	fi
-	cd $BIN_DIR
 }
 ##############################################################################
 ## Import Configurations to the API Gateway Server.
