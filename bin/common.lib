@@ -182,10 +182,11 @@ export_configurations() {
 ## Usage: get_api <api_project> <url> <username> <password>
 ##############################################################################
 get_api() {
+	nameapi=$1
 	url=$2
 	username=$3
 	password=$4
-  nameapi=$5
+  
 	curl --location --request POST '$url/rest/apigateway/search' \
     --header 'Content-Type: application/json' \
     --data-raw ' {
