@@ -194,7 +194,7 @@ get_api() {
       "scope":[ 
          { 
              "attributeName" : "apiName", 
-             "keyword" : "$nameapi" 
+             "keyword" : "'"$nameapi"'" 
          }
       ] 
     }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
