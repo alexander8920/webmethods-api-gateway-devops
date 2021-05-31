@@ -61,20 +61,14 @@ parseArgs(){
 }
 
 main(){
-#Parseinputarguments
-parseArgs "$@"
-if [ -z "$api" ] 
-then 
-	echo "API name is missing" 
-usage
-fi
-if [ -z "$shldDoImport" ] 
-then 
-	echo "Missing what operation to do" 
-usage
-import_source_api $api $url $username $password
+  #Parseinputarguments
+  parseArgs "$@"
+  if [ -z "$api" ] 
+  then 
+    echo "API name is missing" 
+  usage
+  fi
+  import_source_api $api $url $username $password
 }
-
-
 #Call the main function with all arguments passed in...
 main "$@"
