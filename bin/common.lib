@@ -73,6 +73,39 @@ import_api() {
 	cd $BIN_DIR
 }
 ##############################################################################
+## Import an API Source to the API Gateway Server.
+## Usage: import_api <api_project> <url> <username> <password>
+##############################################################################
+import_source_api() {
+
+	api_project=$1
+	url=$2
+	username=$3
+	password=$4
+	BIN_DIR="$PWD"
+	CURR_DIR="../"
+	API_DIR=$5/$api_project
+	ROOTFILENAME=$6
+	IDAPI=$7
+	TIPEAPI=$8
+	if [ -d "$API_DIR" ] 
+	then
+		echo "Zipping"
+		zip -r $API_DIR/$api_project.zip ./* -x app.config
+		echo "Sending"
+    curl --location --request PUT 'http://192.168.1.152:5555/rest/apigateway/apis/$IDAPI' \
+      --header 'Content-Type: multipart/form-data' \
+      --form 'file=@"$API_DIR/$api_project.zip"' \
+      --form 'apiName="$api_project"' \
+      --form 'type="$TIPEAPI"' \
+      --form 'rootFileName="$ROOTFILENAME"' \
+			-u $username:$password
+	else
+		echo "The API with name $api does not exist as a flat file."
+	fi
+	cd $BIN_DIR
+}
+##############################################################################
 ## Import Configurations to the API Gateway Server.
 ## Usage: import_configurations <configuration_name> <url> <username> <password>
 ##############################################################################
