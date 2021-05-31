@@ -93,7 +93,7 @@ import_source_api() {
 		echo "Zipping"
 		zip -r $API_DIR/$api_project.zip ./* -x app.config
 		echo "Sending"
-    curl --location --request PUT 'http://192.168.1.152:5555/rest/apigateway/apis/$IDAPI' \
+    curl --location --request PUT '$url/rest/apigateway/apis/$IDAPI' \
       --header 'Content-Type: multipart/form-data' \
       --form 'file=@"$API_DIR/$api_project.zip"' \
       --form 'apiName="$api_project"' \
@@ -175,6 +175,29 @@ export_configurations() {
 	else
 	echo "The Configuration with name $configuration_name does not exists in the flat file."
 	fi
+}
+
+##############################################################################
+## Get an API from the API Gateway Server.
+## Usage: get_api <api_project> <url> <username> <password>
+##############################################################################
+get_api() {
+	url=$2
+	username=$3
+	password=$4
+  nameapi=$5
+	curl --location --request POST '$url/rest/apigateway/search' \
+    --header 'Content-Type: application/json' \
+    --data-raw ' {
+      "types" : ["api"], 
+      "scope":[ 
+         { 
+             "attributeName" : "apiName", 
+             "keyword" : "$nameapi" 
+         }
+      ] 
+    }' \
+		-u $username:$password
 }
 
 
@@ -295,4 +318,6 @@ while [[ $string ]]; do
   string=${string#*"$delimiter"}
 done
 }
+
+
 
