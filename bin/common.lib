@@ -197,7 +197,7 @@ get_api() {
          }
       ] 
     }' \
-		-u $username:$password
+		-u $username:$password --output info.json
 }
 
 
