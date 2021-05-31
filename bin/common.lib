@@ -91,14 +91,6 @@ import_source_api() {
 		echo "Zipping"
 		zip -r $API_DIR/$api_project.zip $API_DIR/* -x $API_DIR/app.config
 		echo "Sending"
-    curl --location --request PUT "$url/rest/apigateway/apis/$IDAPI" \
-      --header 'Content-Type: multipart/form-data' \
-      --form 'file=@"$API_DIR/$api_project.zip"' \
-      --form 'apiName="$api_project"' \
-      --form 'type="$TYPEAPI"' \
-      --form 'rootFileName="$ROOTFILENAME"' \
-			-u $username:$password
-
 		curl --location --request PUT "$url/rest/apigateway/apis/$IDAPI" \
       --header "Content-Type: multipart/form-data" \
       --form "file=@\"$\API_DIR/$api_project.zip"" \
