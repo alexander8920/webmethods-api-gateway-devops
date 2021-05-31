@@ -187,7 +187,7 @@ get_api() {
 	username=$3
 	password=$4
   
-	curl --location --request POST '$url/rest/apigateway/search' \
+	curl --location --request POST "$url/rest/apigateway/search" \
     --header 'Content-Type: application/json' \
     --data-raw ' {
       "types" : ["api"], 
