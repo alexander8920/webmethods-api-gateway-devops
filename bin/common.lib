@@ -88,7 +88,8 @@ import_source_api() {
 	ROOTFILENAME=$6
 	IDAPI=$7
 	TYPEAPI=$8
-		echo "Zipping"
+		echo "Zipping $API_DIR/$api_project.zip"
+		
 		zip -r $API_DIR/$api_project.zip $API_DIR/ -x $API_DIR/app.config
 		echo "Sending"
 		curl --location --request PUT "${url}/rest/apigateway/apis/${IDAPI}" \
