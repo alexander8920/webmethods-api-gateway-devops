@@ -87,7 +87,7 @@ import_source_api() {
 	API_DIR=$5/$api_project
 	ROOTFILENAME=$6
 	IDAPI=$7
-	TIPEAPI=$8
+	TYPEAPI=$8
 	if [ -d "$API_DIR" ] 
 	then
 		echo "Zipping"
