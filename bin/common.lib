@@ -311,5 +311,29 @@ while [[ $string ]]; do
 done
 }
 
+##############################################################################
+## Active API to the API Gateway Server.
+## Usage: import_api <api_project> <url> <username> <password>
+##############################################################################
+active_api() {
+	api_id=$1
+	url=$2
+	username=$3
+	password=$4	
+	curl --location --request PUT "${url}/rest/apigateway/apis/${api_id}/activate" \
+	  -u $USERNAMEAPI:$PASSWORDAPI
+}
 
+##############################################################################
+## Deactive API to the API Gateway Server.
+## Usage: import_api <api_project> <url> <username> <password>
+##############################################################################
+deactive_api() {
+	api_id=$1
+	url=$2
+	username=$3
+	password=$4	
+	curl --location --request PUT "${url}/rest/apigateway/apis/${api_id}/deactivate" \
+	  -u $USERNAMEAPI:$PASSWORDAPI
+}
 
