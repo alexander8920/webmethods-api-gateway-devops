@@ -111,7 +111,7 @@ then
 	import_source_api $api $url $username $password $api_folder $rootFileName $idapi $typeapi
 else
   echo "Not implemented"  
-	#export_api $api $url $username $password $api_folder 
+	export_source_api $api $url $username $password $api_folder $idapi
 fi
 }
 
