@@ -192,6 +192,22 @@ get_api() {
     }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
 }
 
+##############################################################################
+## Get all API from the API Gateway Server.
+## Usage: get_api <url> <username> <password>
+##############################################################################
+get_all_api() {
+	URLAPIGATEWAY=$1
+	USERNAMEAPI=$2
+	PASSWORDAPI=$3
+  
+	curl --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
+    --header 'Content-Type: application/json' \
+    --data-raw ' {
+      "types" : ["api"] 
+    }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
+}
+
 
 ############################################################################################################################################################
 ## Run a single test suite pointing to a postman collection
