@@ -110,7 +110,7 @@ then
   echo "Importing the API"
 	import_source_api $api $url $username $password $api_folder $rootFileName $idapi $typeapi
 else
-  echo "Not implemented"  
+  echo "Exporting the API"  
 	export_source_api $api $url $username $password $api_folder $idapi
 fi
 }
