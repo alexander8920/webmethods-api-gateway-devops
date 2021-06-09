@@ -98,7 +98,7 @@ import_source_api() {
       --form "rootFileName=\"${ROOTFILENAME}\"" -u $username:$password
 }
 ##############################################################################
-## Import an API Source to the API Gateway Server.
+## export an API Source to the API Gateway Server.
 ## Usage: import_api <api_project> <url> <username> <password>
 ##############################################################################
 export_source_api() {
@@ -112,7 +112,8 @@ export_source_api() {
 	IDAPI=$6	
 		ls -altr $API_DIR
 		echo "Sending"		
-		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password
+		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password --output $API_DIR/$api_project.zip
+		ls -altr $API_DIR
 }
 ##############################################################################
 ## Import Configurations to the API Gateway Server.
