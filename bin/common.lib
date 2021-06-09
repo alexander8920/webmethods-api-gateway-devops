@@ -32,7 +32,7 @@ ping_apigateway_server() {
 		then
 			return 0
 		fi
-		curl -sSf $SERVER/$HEALTH_URL > /dev/null 2>&1
+		curl -k -sSf $SERVER/$HEALTH_URL > /dev/null 2>&1
 		CS=$?
 		if [ $CS -ne 0 ]
 		then
@@ -65,7 +65,7 @@ import_api() {
 		echo "Zipping"
 		cd $API_DIR && zip -r $CURR_DIR/$api_project.zip ./*
 		echo "Sending"
-		curl -Sv -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H "Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
+		curl -k -Sv -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H "Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
 		rm $CURR_DIR/$api_project.zip
 	else
 		echo "The API with name $api does not exist as a flat file."
@@ -90,7 +90,7 @@ import_source_api() {
 	TYPEAPI=$8		
 		ls -altr $API_DIR
 		echo "Sending"
-		curl --location --request PUT "${url}/rest/apigateway/apis/${IDAPI}" \
+		curl -k --location --request PUT "${url}/rest/apigateway/apis/${IDAPI}" \
       --header "Content-Type: multipart/form-data" \
       --form "file=@\"${API_DIR}/${api_project}.zip\"" \
       --form "apiName=\"${api_project}\"" \
@@ -112,8 +112,8 @@ export_source_api() {
 	IDAPI=$6	
 		ls -altr $API_DIR
 		echo "Sending"		
-		curl -s -f --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password --output $API_DIR/$api_project.zip
-		curl -s -f --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=swagger" -u $username:$password --output $API_DIR/$api_project.json
+		curl -k -s -f --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password --output $API_DIR/$api_project.zip
+		curl -k -s -f --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=swagger" -u $username:$password --output $API_DIR/$api_project.json
 		ls -altr $API_DIR
 }
 ##############################################################################
@@ -133,7 +133,7 @@ import_configurations() {
 	if [ -d "$CONF_DIR" ] 
 	then
 		cd $CONF_DIR && zip -r config.zip ./*
-		curl -S -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
+		curl -k -S -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
 		rm config.zip
 	else
 		echo "The Configuration with name $configuration_name does not exists as a flat file."
@@ -156,7 +156,7 @@ export_api() {
 	cat $API_DIR/export_payload.json
 	if [ -d "$API_DIR" ] 
 	then
-	curl -v $url/rest/apigateway/archive -d @"$API_DIR/export_payload.json" --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
+	curl -k -v $url/rest/apigateway/archive -d @"$API_DIR/export_payload.json" --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
 	pwd
 	ls $CURR_DIR
 	unzip -o $CURR_DIR/$api_project.zip -d $API_DIR/
@@ -180,7 +180,7 @@ export_configurations() {
 	
 	if [ -d "$CONF_DIR" ] 
 	then
-	curl -s $url/rest/apigateway/archive -d @"$CONF_DIR/export_payload.json" --output config.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
+	curl -k -s $url/rest/apigateway/archive -d @"$CONF_DIR/export_payload.json" --output config.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
 	unzip -o config.zip -d $CONF_DIR/
 	rm config.zip
 	else
@@ -198,7 +198,7 @@ get_api() {
 	USERNAMEAPI=$3
 	PASSWORDAPI=$4
   
-	curl --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
+	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
     --header 'Content-Type: application/json' \
     --data-raw ' {
       "types" : ["api"], 
@@ -220,7 +220,7 @@ get_all_api() {
 	USERNAMEAPI=$2
 	PASSWORDAPI=$3
   
-	curl --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
+	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
     --header 'Content-Type: application/json' \
     --data-raw ' {
       "types" : ["api"] 
