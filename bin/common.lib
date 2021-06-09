@@ -112,8 +112,8 @@ export_source_api() {
 	IDAPI=$6	
 		ls -altr $API_DIR
 		echo "Sending"		
-		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password --output $API_DIR/$api_project.zip
-		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=swagger" -u $username:$password --output $API_DIR/$api_project.json
+		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=odata" -u $username:$password --output /dev/null -s -w "200" $API_DIR/$api_project.zip
+		curl --location --request GET "${url}/rest/apigateway/apis/${IDAPI}?format=swagger" -u $username:$password --output /dev/null -s -w "200" $API_DIR/$api_project.json
 		ls -altr $API_DIR
 }
 ##############################################################################
