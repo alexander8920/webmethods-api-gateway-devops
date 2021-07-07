@@ -133,7 +133,7 @@ import_configurations() {
 	if [ -d "$CONF_DIR" ] 
 	then
 		cd $CONF_DIR && zip -r config.zip ./*
-		curl -k -S -i -X POST $url/rest/apigateway/archive?overwrite=* -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
+		curl -k -S -i -X POST $url/rest/apigateway/archive?overwrite=APIs,policies -H "Content-Type:application/zip" -H"Accept:application/json" --data-binary @"config.zip" -u $username:$password > /dev/null
 		rm config.zip
 	else
 		echo "The Configuration with name $configuration_name does not exists as a flat file."
@@ -196,11 +196,7 @@ get_api() {
 	nameapi=$1
 	URLAPIGATEWAY=$2
 	USERNAMEAPI=$3
-	PASSWORDAPI=$4
-	
-	echo $nameapi
-	echo $URLAPIGATEWAY
-	echo $USERNAMEAPI
+	PASSWORDAPI=$4	
   
 	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
     --header 'Content-Type: application/json' \
