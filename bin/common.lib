@@ -149,10 +149,10 @@ export_api() {
 	url=$2
 	username=$3
 	password=$4
-	payloadid=$5
 	BIN_DIR="$PWD"
 	CURR_DIR="../"
 	API_DIR=$5/$api_project
+	payloadid=$6
 	echo "Using $API_DIR/export_payload.json"
 	cat $API_DIR/export_payload.json
 	if [ -d "$API_DIR" ] 
