@@ -59,18 +59,8 @@ import_api() {
 	BIN_DIR="$PWD"
 	CURR_DIR="../../"
 	API_DIR=$5/$api_project
+        curl -k -Sv -i -X POST $url/rest/apigateway/archive?overwrite=APIs,policies -H "Content-Type:application/zip" -H "Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
 	
-	if [ -d "$API_DIR" ] 
-	then
-		echo "Zipping"
-		cd $API_DIR && zip -r $CURR_DIR/$api_project.zip ./*
-		echo "Sending"
-		curl -k -Sv -i -X POST $url/rest/apigateway/archive?overwrite=APIs,policies -H "Content-Type:application/zip" -H "Accept:application/json" --data-binary @"$CURR_DIR/$api_project.zip" -u $username:$password > /dev/null
-		rm $CURR_DIR/$api_project.zip
-	else
-		echo "The API with name $api does not exist as a flat file."
-	fi
-	cd $BIN_DIR
 }
 ##############################################################################
 ## Import an API Source to the API Gateway Server.
