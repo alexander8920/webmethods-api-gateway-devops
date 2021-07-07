@@ -198,9 +198,9 @@ get_api() {
 	USERNAMEAPI=$3
 	PASSWORDAPI=$4
 	
-	cat $nameapi
-	cat $URLAPIGATEWAY
-	cat $USERNAMEAPI
+	echo $nameapi
+	echo $URLAPIGATEWAY
+	echo $USERNAMEAPI
   
 	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
     --header 'Content-Type: application/json' \
