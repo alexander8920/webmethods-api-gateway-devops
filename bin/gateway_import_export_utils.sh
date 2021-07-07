@@ -29,6 +29,7 @@ echo "--apigateway_url      APIGateway url to import or export from.Default is h
 echo "--username            The APIGateway username.Default is Administrator."
 echo "--password            The APIGateway password.Default is password."
 echo "--api_folder			The full path to the repo containing the apis"
+echo "--payloadid	id api"
 exit
 }
 
@@ -52,6 +53,10 @@ parseArgs(){
       ;;      
       --password)
         password=${1}
+        shift
+	  ;;
+      --payloadid)
+        payloadid=${1}
         shift
 	  ;;
       --api_folder)
@@ -95,7 +100,7 @@ then
     echo "Importing the API"
 	import_api $api $url $username $password $api_folder
 else
-	export_api $api $url $username $password $api_folder
+	export_api $api $url $username $password $api_folder $payloadid
 fi
 }
 
