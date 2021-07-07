@@ -149,6 +149,7 @@ export_api() {
 	url=$2
 	username=$3
 	password=$4
+	payloadid=$5
 	BIN_DIR="$PWD"
 	CURR_DIR="../"
 	API_DIR=$5/$api_project
@@ -156,7 +157,7 @@ export_api() {
 	cat $API_DIR/export_payload.json
 	if [ -d "$API_DIR" ] 
 	then
-	curl -k -v $url/rest/apigateway/archive -d @"$API_DIR/export_payload.json" --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET" -H "Content-Type:application/json"
+	curl -k -v $url/rest/apigateway/archive?apis=$payloadid  --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET"
 	pwd
 	ls $CURR_DIR
 	unzip -o $CURR_DIR/$api_project.zip -d $API_DIR/
