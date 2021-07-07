@@ -153,18 +153,8 @@ export_api() {
 	CURR_DIR="../"
 	API_DIR=$5/$api_project
 	payloadid=$6
-	echo "Using $API_DIR/export_payload.json"
-	cat $API_DIR/export_payload.json
-	if [ -d "$API_DIR" ] 
-	then
 	curl -k -v $url/rest/apigateway/archive?apis=$payloadid  --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET"
-	pwd
 	ls $CURR_DIR
-	unzip -o $CURR_DIR/$api_project.zip -d $API_DIR/
-	rm $CURR_DIR/$api_project.zip
-	else
-	echo "The API with name $api does not exists in the flat file."
-	fi
 }
 ##############################################################################
 ## Export an API from the API Gateway Server.
