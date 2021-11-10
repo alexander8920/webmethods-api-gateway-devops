@@ -144,6 +144,7 @@ export_api() {
 	API_DIR=$5/$api_project
 	payloadid=$6
 	curl -k -v $url/rest/apigateway/archive?apis=$payloadid  --output $CURR_DIR/$api_project.zip -u $username:$password -H "x-HTTP-Method-Override:GET"
+	echo $url/rest/apigateway/archive?apis=$payloadid
 	ls $CURR_DIR
 }
 ##############################################################################
