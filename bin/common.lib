@@ -305,6 +305,8 @@ promote_api() {
 	    },
 	    \"includeApis\": true    
 	}" -u $USERNAMEAPI:$PASSWORDAPI
+	
+   echo "Deploy_${DEPLOY_APPS}_${DATA}" >> nameDeploy.txt
 } 
 
 
