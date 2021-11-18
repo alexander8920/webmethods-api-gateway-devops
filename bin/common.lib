@@ -292,24 +292,22 @@ run_test_suite() {
 promote_api() {
 
    CURR_DIR="../"
-   PROMOTION_MANAGEMENT=$CURR_DIR/utilities/promotion/PromotionManagement.json
-   PROMOTION_MANAGEMENT_PAYLOAD=$CURR_DIR/apis/$1/promotion_payload.json
-   env_vars=$3
-   
-   newman_environment=
- 
-	 if [ ! -z "$env_vars" ]
-	 then
-		split $env_vars ";"
-		echo $env_vars_array
-		for i in "${env_vars_array[@]}"  
-		do  
-			newman_environment="$newman_environment --env-var $i "
-		done  
-	 fi
-   
-   newman run $PROMOTION_MANAGEMENT  -g $2 -e $PROMOTION_MANAGEMENT_PAYLOAD $newman_environment
-}
+   curl --location --request POST "$URLAPIGATEWAY/rest/apigateway/promotion/?overwrite=true" \
+--header "Content-Type: application/json" \
+--data-raw "{
+    \"description\": \"$DEPLOY_APPS\",
+    \"name\": \"Deploy_$DATA\",
+    \"destinationStages\": [
+        \"$DESTINATIONSTAGES\"
+    ],
+    \"promotedAssets\": {
+        \"api\": [
+                    $APISDEPLOY
+                ]
+    },
+    \"includeApis\": true    
+}"
+} -u $USERNAMEAPI:$PASSWORDAPI
 
 
 ##############################################################################
