@@ -293,21 +293,21 @@ promote_api() {
 
    CURR_DIR="../"
    curl --location --request POST "$URLAPIGATEWAY/rest/apigateway/promotion/?overwrite=true" \
---header "Content-Type: application/json" \
---data-raw "{
-    \"description\": \"$DEPLOY_APPS\",
-    \"name\": \"Deploy_$DATA\",
-    \"destinationStages\": [
-        \"$DESTINATIONSTAGES\"
-    ],
-    \"promotedAssets\": {
-        \"api\": [
-                    $APISDEPLOY
-                ]
-    },
-    \"includeApis\": true    
-}"
-} -u $USERNAMEAPI:$PASSWORDAPI
+	--header "Content-Type: application/json" \
+	--data-raw "{
+	    \"description\": \"$DEPLOY_APPS\",
+	    \"name\": \"Deploy_$DATA\",
+	    \"destinationStages\": [
+		\"$DESTINATIONSTAGES\"
+	    ],
+	    \"promotedAssets\": {
+		\"api\": [
+			    $APISDEPLOY
+			]
+	    },
+	    \"includeApis\": true    
+	}" -u $USERNAMEAPI:$PASSWORDAPI
+} 
 
 
 ##############################################################################
