@@ -296,7 +296,7 @@ promote_api() {
 	--header "Content-Type: application/json" \
 	--data-raw "{
 	    \"description\": \"$DEPLOY_APPS\",
-	    \"name\": \"Deploy_$DATA_$DEPLOY_APPS\",
+	    \"name\": \"Deploy_${DEPLOY_APPS}_${DATA}\",
 	    \"destinationStages\": [
 		\"$DESTINATIONSTAGES\"
 	    ],
