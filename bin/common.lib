@@ -301,9 +301,7 @@ promote_api() {
 		\"$DESTINATIONSTAGES\"
 	    ],
 	    \"promotedAssets\": {
-		\"api\": [
-			    $APISDEPLOY
-			]
+		\"api\": [ $apideploy ]
 	    },
 	    \"includeApis\": true    
 	}" -u $USERNAMEAPI:$PASSWORDAPI
