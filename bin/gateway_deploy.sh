@@ -58,7 +58,7 @@ parseArgs(){
 main(){
   #Parseinputarguments
   parseArgs "$@"
-  promote $url $username $password
+  promote_api $url $username $password
 }
 #Call the main function with all arguments passed in...
 main "$@"
