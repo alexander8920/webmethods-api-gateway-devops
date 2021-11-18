@@ -289,8 +289,8 @@ run_test_suite() {
 ## Promotes an API Project using the API Gateway Promotion management API.
 ## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
 ############################################################################################################################################################
-promote_api() {
-
+promote_api() {   
+   DATA=$(date +"%m%d%Y_%H%M")
    CURR_DIR="../"
    curl --location --request POST "$URLAPIGATEWAY/rest/apigateway/promotion/?overwrite=true" \
 	--header "Content-Type: application/json" \
