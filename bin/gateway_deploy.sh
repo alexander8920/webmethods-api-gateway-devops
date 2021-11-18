@@ -45,13 +45,12 @@ parseArgs(){
       --password)
         password=${1}
         shift
-	  ;;
-	  *)
+      ;;
       --apideploy)
         apideploy=${1}
         shift
-	  ;;
-	  *)
+      ;;
+      *)
         echo "Unknown: $@"
         usage
 		exit
