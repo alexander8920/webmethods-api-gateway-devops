@@ -46,7 +46,7 @@ parseArgs(){
         password=${1}
         shift
       ;;
-      --idrollbak)
+      --idrollback)
         IDROLLBACK=${1}
         shift
       ;;  
