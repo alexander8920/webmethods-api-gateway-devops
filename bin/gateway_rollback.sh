@@ -74,8 +74,9 @@ main(){
 	  rollbaks_api $url $username $password
   elif [ "$operazione" = "start" ]
   then
-    echo "Rollback the API"  
-	  rollbak_do_api $api $url $username $password $IDROLLBACK
+    echo "Rollback the API" 
+    echo $IDROLLBACK
+    rollbak_do_api $api $url $username $password $IDROLLBACK
   fi
 }
 #Call the main function with all arguments passed in...
