@@ -322,9 +322,7 @@ rollbaks_api() {
 ## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
 ############################################################################################################################################################
 rollbak_do_api() {   
-   echo $IDROLLBACK
-   curl  -k --location --request PUT "$URLAPIGATEWAY/rest/apigateway/rollback/$IDROLLBACK" \
-     -u $USERNAMEAPI:$PASSWORDAPI
+   curl  -k --location --request PUT "$URLAPIGATEWAY/rest/apigateway/rollback/$IDROLLBACK" -u $USERNAMEAPI:$PASSWORDAPI
 } 
 
 
