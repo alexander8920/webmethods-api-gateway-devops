@@ -50,10 +50,10 @@ parseArgs(){
         IDROLLBACK=${1}
         shift
       ;;  
-	    --import)
+	    --get_all)
         opretazione='get_all'
       ;;
-	    --export)
+	    --start)
         shldDoImport='start'
       ;;
       *)
