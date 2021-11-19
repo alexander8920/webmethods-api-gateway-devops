@@ -51,7 +51,7 @@ parseArgs(){
         shift
       ;;  
       --get_all)
-        opretazione='get_all'
+        operazione='get_all'
       ;;
       --start)
         operazione='start'
