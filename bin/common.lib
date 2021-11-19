@@ -323,7 +323,7 @@ rollbaks_api() {
 ############################################################################################################################################################
 rollbak_do_api() {   
    echo $IDROLLBACK
-   curl  -k --location --request PUT "$URLAPIGATEWAY:5555/rest/apigateway/rollback/$IDROLLBACK" \
+   curl  -k --location --request PUT "$URLAPIGATEWAY/rest/apigateway/rollback/$IDROLLBACK" \
      -u $USERNAMEAPI:$PASSWORDAPI
 } 
 
