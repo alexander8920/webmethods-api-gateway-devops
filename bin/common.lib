@@ -309,6 +309,23 @@ promote_api() {
    echo "Deploy_${DEPLOY_APPS}_${DATA}" >> nameDeploy.txt
 } 
 
+############################################################################################################################################################
+## Promotes an API Project using the API Gateway Promotion management API.
+## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
+############################################################################################################################################################
+rollbaks_api() {   
+   curl --location --request GET "$URLAPIGATEWAY/rest/apigateway/rollback" --header "Accept: application/json" -u $USERNAMEAPI:$PASSWORDAPI -o rollbacks.json
+} 
+
+############################################################################################################################################################
+## Promotes an API Project using the API Gateway Promotion management API.
+## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
+############################################################################################################################################################
+rollbak_do_api() {   
+   curl --location --request PUT "$URLAPIGATEWAY:5555/rest/apigateway/rollback/$IDROLLBACK" \
+     -u $USERNAMEAPI:$PASSWORDAPI
+} 
+
 
 ##############################################################################
 ## Utility method to split a input with an delimter
