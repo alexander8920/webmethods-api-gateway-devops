@@ -50,11 +50,11 @@ parseArgs(){
         IDROLLBACK=${1}
         shift
       ;;  
-	    --get_all)
+      --get_all)
         opretazione='get_all'
       ;;
-	    --start)
-        shldDoImport='start'
+      --start)
+        operazione='start'
       ;;
       *)
         echo "Unknown: $@"
@@ -68,11 +68,12 @@ parseArgs(){
 main(){
   #Parseinputarguments
   parseArgs "$@"
-	if [ "$shldDoImport" = "true" ]
+  if [ "$operazione" = "get_all" ]
   then
     echo "Get all rollbacks"
 	  rollbaks_api $url $username $password
-  else
+  elif [ "$operazione" = "start" ]
+  then
     echo "Rollback the API"  
 	  rollbak_do_api $api $url $username $password $IDROLLBACK
   fi
