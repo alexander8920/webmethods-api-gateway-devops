@@ -70,11 +70,11 @@ main(){
   parseArgs "$@"
 	if [ "$shldDoImport" = "true" ]
   then
-    echo "Importing the API"
-	  import_source_api $url $username $password
+    echo "Get all rollbacks"
+	  rollbaks_api $url $username $password
   else
-    echo "Exporting the API"  
-	  export_source_api $api $url $username $password $IDROLLBACK
+    echo "Rollback the API"  
+	  rollbak_do_api $api $url $username $password $IDROLLBACK
   fi
 }
 #Call the main function with all arguments passed in...
