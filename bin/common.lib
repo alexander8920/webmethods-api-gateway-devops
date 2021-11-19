@@ -292,7 +292,7 @@ run_test_suite() {
 promote_api() {   
    DATA=$(date +"%m%d%Y_%H%M")
    CURR_DIR="../"
-   curl --location --request POST "$URLAPIGATEWAY/rest/apigateway/promotion/?overwrite=true" \
+   curl -k --location --request POST "$URLAPIGATEWAY/rest/apigateway/promotion/?overwrite=true" \
 	--header "Content-Type: application/json" \
 	--data-raw "{
 	    \"description\": \"$DEPLOY_APPS\",
@@ -314,7 +314,7 @@ promote_api() {
 ## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
 ############################################################################################################################################################
 rollbaks_api() {   
-   curl --location --request GET "$URLAPIGATEWAY/rest/apigateway/rollback" --header "Accept: application/json" -u $USERNAMEAPI:$PASSWORDAPI -o rollbacks.json
+   curl  -k --location --request GET "$URLAPIGATEWAY/rest/apigateway/rollback" --header "Accept: application/json" -u $USERNAMEAPI:$PASSWORDAPI -o rollbacks.json
 } 
 
 ############################################################################################################################################################
@@ -322,7 +322,7 @@ rollbaks_api() {
 ## Usage promote_api <api_project> <environment_file_location> <environment_Variables>
 ############################################################################################################################################################
 rollbak_do_api() {   
-   curl --location --request PUT "$URLAPIGATEWAY:5555/rest/apigateway/rollback/$IDROLLBACK" \
+   curl  -k --location --request PUT "$URLAPIGATEWAY:5555/rest/apigateway/rollback/$IDROLLBACK" \
      -u $USERNAMEAPI:$PASSWORDAPI
 } 
 
