@@ -40,7 +40,7 @@ parseArgs(){
         shift
       ;;
       --policy_action)
-        api=${1}
+        policy_action=${1}
         shift
       ;;
       --username)
