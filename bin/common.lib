@@ -387,3 +387,26 @@ get_all_policy() {
        "responseFields" : ["names","policyEnforcements"] 
     }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
 }
+
+##############################################################################
+## Get an POLICY ACTION from the API Gateway Server.
+## Usage: get_api <api_project> <url> <username> <password>
+##############################################################################
+get_policy_action() {
+	policy_action=$1
+	URLAPIGATEWAY=$2
+	USERNAMEAPI=$3
+	PASSWORDAPI=$4	
+  
+	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
+    --header 'Content-Type: application/json' \
+    --data-raw ' {
+      "types" : ["POLICY_ACTION"], 
+      "scope":[ 
+         { 
+             "attributeName" : "id", 
+             "keyword" : "'"$policy_action"'" 
+         }
+      ] 
+    }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
+}
