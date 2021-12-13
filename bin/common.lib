@@ -370,7 +370,7 @@ deactive_api() {
 	  -u $USERNAMEAPI:$PASSWORDAPI
 }
 
-get_all_policy
+
 ##############################################################################
 ## Get all POLICY from the API Gateway Server.
 ## Usage: get_api <url> <username> <password>
