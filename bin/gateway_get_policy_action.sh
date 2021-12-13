@@ -68,5 +68,5 @@ main(){
     echo "Policy action name is missing" 
   usage
   fi
-  get_api $policy_action $url $username $password
+  get_policy_action $policy_action $url $username $password
 }
