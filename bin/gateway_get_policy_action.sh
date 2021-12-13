@@ -70,3 +70,5 @@ main(){
   fi
   get_policy_action $policy_action $url $username $password
 }
+#Call the main function with all arguments passed in...
+main "$@"
