@@ -370,3 +370,20 @@ deactive_api() {
 	  -u $USERNAMEAPI:$PASSWORDAPI
 }
 
+get_all_policy
+##############################################################################
+## Get all POLICY from the API Gateway Server.
+## Usage: get_api <url> <username> <password>
+##############################################################################
+get_all_policy() {
+	URLAPIGATEWAY=$1
+	USERNAMEAPI=$2
+	PASSWORDAPI=$3
+  
+	curl -k --location --request POST $URLAPIGATEWAY/rest/apigateway/search \
+    --header 'Content-Type: application/json' \
+    --data-raw ' {
+       "types" : ["POLICY"],
+       "responseFields" : ["names","policyEnforcements"] 
+    }' -u $USERNAMEAPI:$PASSWORDAPI --output info.json
+}
